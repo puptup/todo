@@ -1,6 +1,6 @@
 import TodoListElement from "./TodoListElement"
 
-function TodoList({todoList, changeStatus, cathegory, deleteElement}){
+const TodoList = ({ todoList, changeStatus, cathegory, deleteElement }) => {
 
   const styles = {
     ul:{

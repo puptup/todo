@@ -3,7 +3,7 @@ import AddTodo from "./Todo/AddTodo";
 import TodoList from "./Todo/TodoList";
 import list from "./constants/list";
 
-function App() {
+const App = () => {
 
   const [todoList, setTodoList] = useState(list)
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function AddTodo({addTodo}){
+const AddTodo = ({ addTodo }) => {
 
   const styles = {
     div: {
