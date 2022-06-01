@@ -17,17 +17,11 @@ function TodoListElement({listElement, index, changeStatus, deleteElement }){
     }
   }
 
-  const getInput = () => {
-    if (listElement.completed){
-      return <input type="checkbox" style={styles.input} onChange={()=>{changeStatus(listElement.id)}} checked/>
-    }
-    return <input type="checkbox" style={styles.input} onChange={()=>{changeStatus(listElement.id)}}/>
-  }
 
   return (
     <li style={styles.li}>
       <span>
-        {getInput()}
+      <input type="checkbox" style={styles.input} onChange={()=>{changeStatus(listElement.id)}} checked={listElement.completed}/>
         <strong style={styles.strong}>{index + 1}</strong>
         {listElement.title}
       </span>
