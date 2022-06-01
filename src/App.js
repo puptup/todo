@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddTodo from "./Todo/AddTodo";
 import TodoList from "./Todo/TodoList";
+import TodoListElement from "./Todo/TodoListElement";
 
 function App() {
 
@@ -43,14 +44,14 @@ function App() {
 
   return (
     <div className="wrapper">
-      
+
       <h1>Add new todo:</h1>
 
       <AddTodo addTodo = {addTodoElement}/>
 
       <h3>Incoming list:</h3>
-
-      <TodoList 
+      {todoList.filter((todoElement) => !todoElement.completed).length > 0 
+      ? <TodoList 
         todoList={todoList.reduce((acc, todoElement)=>{
           if (!todoElement.completed){
             acc.push(todoElement)
@@ -59,11 +60,11 @@ function App() {
         }, [])} 
         changeStatus={changeCompletedStatus} 
         deleteElement= {deleteElement}
-      />
+      /> : <h4 style={{color: '#b2b2b2'}}>All done!</h4>}
 
       <h3>Completed list:</h3>
-
-      <TodoList 
+      {todoList.filter((todoElement) => todoElement.completed).length > 0
+      ? <TodoList 
         todoList={todoList.reduce((acc, todoElement)=>{
           if (todoElement.completed){
             acc.push(todoElement)
@@ -72,7 +73,8 @@ function App() {
         }, [])} 
         changeStatus={changeCompletedStatus} 
         deleteElement= {deleteElement}
-      />
+        /> 
+      : <h4 style={{color: '#b2b2b2'}}>Do! Don't be lazy!</h4>}
 
     </div>
   );
