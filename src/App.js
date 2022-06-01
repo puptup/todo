@@ -1,17 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import AddTodo from "./Todo/AddTodo";
 import TodoList from "./Todo/TodoList";
+import list from "./constants/list";
 
 function App() {
 
-  const [todoList, setTodoList] = useState([
-    {id:1, completed: false, title: 'Выучить вебпак'},
-    {id:2, completed: true, title: 'Выучить реакт'},
-    {id:3, completed: true, title: 'Покормить собаку'},
-    {id:4, completed: false, title: 'Выучить ts'},
-    {id:5, completed: true, title: 'Выучить js'},
-    {id:6, completed: false, title: 'Уволиться с завода'},
-  ])
+  const [todoList, setTodoList] = useState(list)
 
   const addTodoElement = (title) => {
     if (title){
@@ -41,6 +35,13 @@ function App() {
     setTodoList(newList)
   }
 
+  const [completedList, incompletedList] = useMemo(()=>{
+    const completedList = todoList.filter((todoElement) => todoElement.completed)
+    const incompletedList = todoList.filter((todoElement) => !todoElement.completed)
+
+    return [completedList, incompletedList]
+  }, [todoList])
+
   return (
     <div className="wrapper">
 
@@ -49,27 +50,17 @@ function App() {
       <AddTodo addTodo = {addTodoElement}/>
 
       <h3>Incoming list:</h3>
-      {todoList.filter((todoElement) => !todoElement.completed).length > 0 
+      {incompletedList.length > 0 
       ? <TodoList 
-        todoList={todoList.reduce((acc, todoElement)=>{
-          if (!todoElement.completed){
-            acc.push(todoElement)
-          }
-          return acc
-        }, [])} 
+        todoList={incompletedList} 
         changeStatus={changeCompletedStatus} 
         deleteElement= {deleteElement}
       /> : <h4 style={{color: '#b2b2b2'}}>All done!</h4>}
 
       <h3>Completed list:</h3>
-      {todoList.filter((todoElement) => todoElement.completed).length > 0
+      {completedList.length > 0
       ? <TodoList 
-        todoList={todoList.reduce((acc, todoElement)=>{
-          if (todoElement.completed){
-            acc.push(todoElement)
-          }
-          return acc
-        }, [])} 
+        todoList={completedList} 
         changeStatus={changeCompletedStatus} 
         deleteElement= {deleteElement}
         /> 
