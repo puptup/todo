@@ -1,6 +1,6 @@
 import TodoListElement from "./TodoListElement"
 
-const TodoList = ({ todoList, changeStatus, deleteElement }) => {
+const TodoList = ({ todoList }) => {
 
   const styles = {
     ul:{
@@ -17,8 +17,6 @@ const TodoList = ({ todoList, changeStatus, deleteElement }) => {
                 key={listElement.id} 
                 listElement={listElement}
                 index={index} 
-                changeStatus = {changeStatus}
-                deleteElement = {deleteElement}
               />
       })}
     </ul>

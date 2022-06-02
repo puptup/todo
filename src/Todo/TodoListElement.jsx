@@ -1,4 +1,7 @@
-function TodoListElement({listElement, index, changeStatus, deleteElement }){
+import { useContext } from "react"
+import context from "../ctx"
+
+function TodoListElement({listElement, index }){
   
   const styles = {
     li: {
@@ -17,11 +20,12 @@ function TodoListElement({listElement, index, changeStatus, deleteElement }){
     }
   }
 
+  const {deleteElement, changeCompletedStatus} = useContext(context)
 
   return (
     <li style={styles.li}>
       <span>
-      <input type="checkbox" style={styles.input} onChange={()=>{changeStatus(listElement.id)}} checked={listElement.completed}/>
+      <input type="checkbox" style={styles.input} onChange={()=>{changeCompletedStatus(listElement.id)}} checked={listElement.completed}/>
         <strong style={styles.strong}>{index + 1}</strong>
         {listElement.title}
       </span>
