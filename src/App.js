@@ -17,12 +17,7 @@ const App = () => {
   }
 
   const deleteElement = (id) => {
-    setTodoList(todoList.reduce((acc,todoElement) =>{
-      if (todoElement.id !== id) {
-        acc.push(todoElement)
-      }
-      return acc
-    }, []))
+    setTodoList(todoList.filter((todoElement) => todoElement.id !== id))
   }
 
   const changeCompletedStatus = (id) => {
