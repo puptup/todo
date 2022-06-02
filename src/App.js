@@ -21,11 +21,9 @@ const App = () => {
   }
 
   const changeCompletedStatus = (id) => {
-    const todoElementIndex = todoList.findIndex((todoElement) => todoElement.id === id)
     const todoElement = todoList.find((todoElement) => todoElement.id === id)
     todoElement.completed = !todoElement.completed
-
-    const newList = todoList.slice(0, todoElementIndex).concat(todoList.slice(todoElementIndex+1))
+    const newList = todoList.filter((todoElement) => todoElement.id !== id) 
     newList.push(todoElement)
     setTodoList(newList)
   }
