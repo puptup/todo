@@ -10,9 +10,9 @@ const App = () => {
   const addTodoElement = (title) => {
     if (title){
       const newId = new Date()
-      todoList.push({id: newId, completed: false, title})
-      const newTodoList = [...todoList]
-      setTodoList(newTodoList)
+      setTodoList((prevList)=>{
+        return [...prevList, {id: newId, completed: false, title}]
+      })
     }
   }
 
