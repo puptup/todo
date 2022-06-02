@@ -1,38 +1,42 @@
-import { useState } from "react"
+import { useState } from "react";
 
 const AddTodo = ({ addTodo }) => {
-
   const styles = {
     div: {
-      display: 'flex'
+      display: "flex",
     },
     textarea: {
-      resize: 'none',
-      display: 'block',
-      width: '100%'
+      resize: "none",
+      display: "block",
+      width: "100%",
     },
     button: {
-      display: 'block',
-      margin: '0 auto'
-    }
-  }
+      display: "block",
+      margin: "0 auto",
+    },
+  };
 
-  const addTodoAndClearTextarea = () =>{
-    addTodo(textArea)
-    setTextarea('')
-  }
+  const addTodoAndClearTextarea = () => {
+    addTodo(textArea);
+    setTextarea("");
+  };
 
-  const [textArea, setTextarea] = useState('')
+  const [textArea, setTextarea] = useState("");
 
   return (
     <div style={styles.div}>
-      <textarea 
+      <textarea
         value={textArea}
-        onChange={(event)=>{setTextarea(event.target.value)}}
-        style={styles.textarea}/>
-      <button style={styles.button} onClick={() => addTodoAndClearTextarea()}>add</button>
+        onChange={(event) => {
+          setTextarea(event.target.value);
+        }}
+        style={styles.textarea}
+      />
+      <button style={styles.button} onClick={() => addTodoAndClearTextarea()}>
+        add
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default AddTodo
+export default AddTodo;
