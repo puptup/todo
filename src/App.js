@@ -9,7 +9,7 @@ const App = () => {
 
   const addTodoElement = (title) => {
     if (title){
-      const newId = Math.max(...todoList.map(todoElement => todoElement.id)) + 1
+      const newId = new Date()
       todoList.push({id: newId, completed: false, title})
       const newTodoList = [...todoList]
       setTodoList(newTodoList)
