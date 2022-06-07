@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import AddTodo from "./Todo/AddTodo";
 import TodoList from "./Todo/TodoList";
 import list from "./constants/list";
@@ -18,26 +18,35 @@ const App = () => {
     return [completedList, incompletedList];
   }, [todoList]);
 
-  const addTodoElement = (title) => {
-    if (title) {
-      const newId = new Date();
-      setTodoList((prevList) => {
-        return [...prevList, { id: newId, completed: false, title }];
-      });
-    }
-  };
+  const addTodoElement = useCallback(
+    (title) => {
+      if (title) {
+        const newId = new Date();
+        setTodoList((prevList) => {
+          return [...prevList, { id: newId, completed: false, title }];
+        });
+      }
+    },
+    [setTodoList]
+  );
 
-  const deleteElement = (id) => {
-    setTodoList(todoList.filter((todoElement) => todoElement.id !== id));
-  };
+  const deleteElement = useCallback(
+    (id) => {
+      setTodoList(todoList.filter((todoElement) => todoElement.id !== id));
+    },
+    [todoList]
+  );
 
-  const changeCompletedStatus = (id) => {
-    const todoElement = todoList.find((todoElement) => todoElement.id === id);
-    todoElement.completed = !todoElement.completed;
-    const newList = todoList.filter((todoElement) => todoElement.id !== id);
-    newList.push(todoElement);
-    setTodoList(newList);
-  };
+  const changeCompletedStatus = useCallback(
+    (id) => {
+      const todoElement = todoList.find((todoElement) => todoElement.id === id);
+      todoElement.completed = !todoElement.completed;
+      const newList = todoList.filter((todoElement) => todoElement.id !== id);
+      newList.push(todoElement);
+      setTodoList(newList);
+    },
+    [todoList]
+  );
 
   return (
     <context.Provider
